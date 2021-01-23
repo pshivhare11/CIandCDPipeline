@@ -58,10 +58,10 @@ stages:
         artifactName: 'app'
     
     - task: AzureRmWebAppDeployment@4
-      displayName: Deploy_To_Server
+      displayName: DeployToAppService
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'testservice'
         appType: 'webApp'
         WebAppName: 'DevTestWebAppService'
-        packageForLinux: '$(Build.ArtifactStagingDirectory)/www/*.zip'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/app/*.zip'
