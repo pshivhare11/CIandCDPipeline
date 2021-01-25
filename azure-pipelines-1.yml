@@ -52,7 +52,7 @@ stages:
 #    dependsOn: Build
 #    condition: succeeded()
     #jobs:
-    #  - template: ./pipelines/common-call.yml
+    #  - template: 
     #    parameters:
     #      azureServiceConnection: '$(serviceConnection)'
     #      environmentName: 'Development'
