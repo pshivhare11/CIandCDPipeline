@@ -46,11 +46,11 @@ stages:
         ArtifactName: 'dotnet'
         publishLocation: 'Container'
       condition: succeededOrFailed()
-${{ if eq(parameters.environment, 'Dev') }}:
-  - stage: 'DeployToDev'
-    displayName: 'Deploy to Development'
-    dependsOn: Build
-    condition: succeeded()
+#${{ if eq(parameters.environment, 'Dev') }}:
+#  - stage: 'DeployToDev'
+#    displayName: 'Deploy to Development'
+#    dependsOn: Build
+#    condition: succeeded()
     #jobs:
     #  - template: ./pipelines/common-call.yml
     #    parameters:
