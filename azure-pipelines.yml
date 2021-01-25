@@ -80,6 +80,8 @@ stages:
         deploy:
           steps:
           
+          - task: ManualIntervention@8
+            displayName: 'Manual Intervention'
           - task: DownloadBuildArtifacts@0
             displayName: Download_Build_Artifacts
             inputs:
@@ -89,10 +91,10 @@ stages:
               artifactName: 'app'
           
           - task: AzureRmWebAppDeployment@4
-            displayName: DeployToProductionServer
+            displayName: DeployToServer
             inputs:
               ConnectionType: 'AzureRM'
               azureSubscription: 'testservice'
               appType: 'webApp'
               WebAppName: '$(ProdWebAppService)'
-              packageForLinux: '$(Build.ArtifactStagingDirectory)/app/*.zip'         
+              packageForLinux: '$(Build.ArtifactStagingDirectory)/app/*.zip'
