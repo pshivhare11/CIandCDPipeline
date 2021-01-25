@@ -51,13 +51,13 @@ ${{ if eq(parameters.environment, 'Dev') }}:
     displayName: 'Deploy to Development'
     dependsOn: Build
     condition: succeeded()
-    jobs:
-      - template: ./pipelines/common-call.yml
-        parameters:
-          azureServiceConnection: '$(serviceConnection)'
-          environmentName: 'Development'
-          webAppServiceName: 'DevTestWebAppService'
-          deployFor: 'Deploy_To_Dev'    
+    #jobs:
+    #  - template: ./pipelines/common-call.yml
+    #    parameters:
+    #      azureServiceConnection: '$(serviceConnection)'
+    #      environmentName: 'Development'
+    #      webAppServiceName: 'DevTestWebAppService'
+    #      deployFor: 'Deploy_To_Dev'    
 
 - stage: 'Development'
   displayName: 'Deploy To Development Stage'
