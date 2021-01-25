@@ -81,8 +81,14 @@ stages:
           steps:
           
           
-          - task: ManualIntervention@8
+          - task: ManualIntervention@0
             displayName: 'Manual Intervention'
+            timeoutInMinutes: 1440
+            inputs:
+              notifyUsers: kgarg@moreyeahs.co
+              instructions: "please validate"
+              onTimeout: 'resume'
+
           - task: DownloadBuildArtifacts@0
             displayName: Download_Build_Artifacts
             inputs:
