@@ -94,7 +94,7 @@ stages:
           steps:
           - script: echo 'Reached Deployment'
           - script: echo 'Manual Intervention Applied'
-          - task: ManualIntervention@8
+          - task: ManualValidation@0
             displayName: 'Manual Intervention'
           - task: DownloadBuildArtifacts@0
             displayName: Download_Build_Artifacts
