@@ -22,7 +22,7 @@ stages:
 
     steps:
     - task: NuGetToolInstaller@1
-    - task: NuGetCommand@2    
+#- task: NuGetCommand@2    
       inputs:
         restoreSolution: '$(solution)'
     - task: VSBuild@1
