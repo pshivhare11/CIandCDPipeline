@@ -80,7 +80,7 @@ stages:
         deploy:
           steps:
           
-          - task: ManualIntervention@8
+          - task: ManualIntervention@0
             displayName: 'Manual Intervention'
           - task: DownloadBuildArtifacts@0
             displayName: Download_Build_Artifacts
