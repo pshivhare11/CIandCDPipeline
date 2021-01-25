@@ -43,9 +43,21 @@ stages:
       
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'www'
+        ArtifactName: 'dotnet'
         publishLocation: 'Container'
       condition: succeededOrFailed()
+${{ if eq(parameters.environment, 'Dev') }}:
+  - stage: 'DeployToDev'
+    displayName: 'Deploy to Development'
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - template: ./pipelines/common-call.yml
+        parameters:
+          azureServiceConnection: '$(serviceConnection)'
+          environmentName: 'Development'
+          webAppServiceName: 'DevTestWebAppService'
+          deployFor: 'Deploy_To_Dev'    
 
 - stage: 'Development'
   displayName: 'Deploy To Development Stage'
@@ -103,7 +115,7 @@ stages:
               downloadType: 'specific'
               downloadPath: '$(System.ArtifactsDirectory)'
               artifactName: 'dotnet'
-          - task: ManualIntervention@8
+         # - task: ManualIntervention@8
 
           
           - task: AzureRmWebAppDeployment@4
@@ -114,4 +126,4 @@ stages:
               appType: 'webApp'
               WebAppName: '$(ProdWebAppService)'
               packageForLinux: '$(Build.ArtifactStagingDirectory)/dotnet/*.zip'
-    
+
