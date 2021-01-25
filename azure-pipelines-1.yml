@@ -104,8 +104,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          - script: echo 'Reached Deployment'
-          - script: echo 'Manual Intervention Applied'
+        
          # - task: ManualValidation@0
          #   displayName: 'Manual Intervention'
           - task: DownloadBuildArtifacts@0
