@@ -66,10 +66,10 @@ stages:
         WebAppName: 'DevTestWebAppService'
         packageForLinux: '$(Build.ArtifactStagingDirectory)/app/*.zip'
 
-- stage: 'Production'
+- stage: 'ProductionDeployment'
   displayName: 'Deploy To Production'
   jobs:
-  - deployment: 'DeployToProAppService'
+  - deployment: 'DeployWebAppToProduction'
     environment: 'Prod'
     variables:
       EnvironmentName: 'Production'
@@ -80,7 +80,8 @@ stages:
         deploy:
           steps:
           
-          - task: ManualIntervention@0
+          
+          - task: ManualIntervention@8
             displayName: 'Manual Intervention'
           - task: DownloadBuildArtifacts@0
             displayName: Download_Build_Artifacts
@@ -91,7 +92,7 @@ stages:
               artifactName: 'app'
           
           - task: AzureRmWebAppDeployment@4
-            displayName: DeployToServer
+            displayName: Deploy_To_Server
             inputs:
               ConnectionType: 'AzureRM'
               azureSubscription: 'testservice'
