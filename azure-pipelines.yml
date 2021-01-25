@@ -81,7 +81,7 @@ stages:
           steps:
           
           
-          - task: ManualIntervention@0
+          - task: ManualIntervention@8
             displayName: 'Manual Intervention'
             timeoutInMinutes: 1440
             inputs:
