@@ -19,6 +19,7 @@ stages:
       solution: '**/*.sln'
       buildPlatform: 'Any CPU'
       buildConfiguration: 'Release'
+      
 
     steps:
     - task: NuGetToolInstaller@1
@@ -43,10 +44,12 @@ stages:
 
 - stage: Deploy
   displayName: 'Deploy To Development Stage'
+  
   dependsOn: Build
   condition: succeeded('Build')
   jobs:
   - job: Deploy
+
     displayName: Deployment
     pool:
       vmImage: 'windows-latest'
