@@ -70,7 +70,7 @@ stages:
 
 
 #${{ if eq(parameters.environment, 'development') }}:        
-steps:
+steps: 
   - ${{ if eq(parameters.environment, 'development') }}:
     - stage: 'Development'
       displayName: 'Deploy To Development Stage'
