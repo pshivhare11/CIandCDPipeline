@@ -14,6 +14,14 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   ServiceConnection: 'testservice'
+parameters:
+  - name: environment
+    displayName: Choose the deployment environment
+    type: string
+    default: devlopment
+    values:
+      - development
+      - production
   
 stages:
 - stage: Build
