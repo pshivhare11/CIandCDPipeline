@@ -103,7 +103,7 @@ ${{ if eq(parameters.environment, 'development') }}:
                   WebAppName: '$(DevWebAppService)'
                   packageForLinux: '$(Build.ArtifactStagingDirectory)/dotnet/*.zip'
 
-${{ if eq(parameters.environment, 'production') }}:
+  ${{ if eq(parameters.environment, 'production') }}:
 - stage: 'Production'
   displayName: 'Deploy To Production Stage'
   jobs:
