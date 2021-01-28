@@ -55,7 +55,7 @@ stages:
         publishLocation: 'Container'
       condition: succeededOrFailed()
 #${{ if eq(parameters.environment, 'development') }}:
-  - stage: 'Development'
+  #- stage: 'Development'
 #    displayName: 'Deploy to Development'
 #    dependsOn: Build
 #    condition: succeeded()
@@ -70,7 +70,6 @@ stages:
 
 
 #${{ if eq(parameters.environment, 'development') }}:        
-
 steps:
   - ${{ if eq(parameters.environment, 'development') }}:
     - stage: 'Development'
