@@ -70,11 +70,10 @@ stages:
 
 
 #${{ if eq(parameters.environment, 'development') }}:        
-steps: 
-  - ${{ if eq(parameters.environment, 'development') }}:
-    - stage: 'Development'
-      displayName: 'Deploy To Development Stage'
-      jobs:
+- ${{ if eq(parameters.environment, 'development') }}:
+- stage: 'Development'
+  displayName: 'Deploy To Development Stage'
+  jobs:
       - deployment: 'DeployToDev'
         displayName: 'Deploy Web Application To Dev'
         environment: 'dev'
@@ -104,10 +103,10 @@ steps:
                   WebAppName: '$(DevWebAppService)'
                   packageForLinux: '$(Build.ArtifactStagingDirectory)/dotnet/*.zip'
 
-  - ${{ if eq(parameters.environment, 'production') }}:
-    - stage: 'Production'
-      displayName: 'Deploy To Production Stage'
-      jobs:
+- ${{ if eq(parameters.environment, 'production') }}:
+- stage: 'Production'
+  displayName: 'Deploy To Production Stage'
+  jobs:
       - deployment: 'DeployToProduction'
         environment: 'Prod'
         variables:
