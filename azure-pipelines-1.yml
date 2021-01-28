@@ -54,8 +54,8 @@ stages:
         ArtifactName: 'dotnet'
         publishLocation: 'Container'
       condition: succeededOrFailed()
-#${{ if eq(parameters.environment, 'Dev') }}:
-#  - stage: 'DeployToDev'
+#${{ if eq(parameters.environment, 'development') }}:
+  - stage: 'Development'
 #    displayName: 'Deploy to Development'
 #    dependsOn: Build
 #    condition: succeeded()
@@ -65,39 +65,44 @@ stages:
     #      azureServiceConnection: '$(serviceConnection)'
     #      environmentName: 'Development'
     #      webAppServiceName: 'DevTestWebAppService'
-    #      deployFor: 'Deploy_To_Dev'    
+    #      deployFor: 'Deploy_To_Dev'
 
-- stage: 'Development'
-  displayName: 'Deploy To Development Stage'
-  jobs:
-  - deployment: 'DeployToDev'
-    displayName: 'Deploy Web Application To Dev'
-    environment: 'dev'
-    variables:
-      EnvironmentName: 'Development'
-      MyVariable: 'Dev_Value'
-      DevWebAppService: 'DevTestWebAppService'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          
-          - task: DownloadBuildArtifacts@0
-            displayName: Download_Build_Artifacts
-            inputs:
-              buildType: 'current'
-              downloadType: 'specific'
-              downloadPath: '$(System.ArtifactsDirectory)'
-              artifactName: 'dotnet'
-          
-          - task: AzureRmWebAppDeployment@4
-            displayName: Deploy_To_Server
-            inputs:
-              ConnectionType: 'AzureRM'
-              azureSubscription: '$(ServiceConnection)'
-              appType: 'webApp'
-              WebAppName: '$(DevWebAppService)'
-              packageForLinux: '$(Build.ArtifactStagingDirectory)/dotnet/*.zip'
+
+
+${{ if eq(parameters.environment, 'development') }}:        
+
+${{ if eq(parameters.environment, 'development') }}:
+  - stage: 'Development'
+    displayName: 'Deploy To Development Stage'
+    jobs:
+    - deployment: 'DeployToDev'
+      displayName: 'Deploy Web Application To Dev'
+      environment: 'dev'
+      variables:
+        EnvironmentName: 'Development'
+        MyVariable: 'Dev_Value'
+        DevWebAppService: 'DevTestWebAppService'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            
+            - task: DownloadBuildArtifacts@0
+              displayName: Download_Build_Artifacts
+              inputs:
+                buildType: 'current'
+                downloadType: 'specific'
+                downloadPath: '$(System.ArtifactsDirectory)'
+                artifactName: 'dotnet'
+            
+            - task: AzureRmWebAppDeployment@4
+              displayName: Deploy_To_Server
+              inputs:
+                ConnectionType: 'AzureRM'
+                azureSubscription: '$(ServiceConnection)'
+                appType: 'webApp'
+                WebAppName: '$(DevWebAppService)'
+                packageForLinux: '$(Build.ArtifactStagingDirectory)/dotnet/*.zip'
 
 - stage: 'Production'
   displayName: 'Deploy To Production Stage'
