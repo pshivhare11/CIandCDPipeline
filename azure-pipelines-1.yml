@@ -105,8 +105,7 @@ steps:
                   WebAppName: '$(DevWebAppService)'
                   packageForLinux: '$(Build.ArtifactStagingDirectory)/dotnet/*.zip'
 
-steps:
-  - ${{ if eq(parameters.environment, 'development') }}:
+- ${{ if eq(parameters.environment, 'production') }}:
   - stage: 'Production'
     displayName: 'Deploy To Production Stage'
     jobs:
