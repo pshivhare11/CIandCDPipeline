@@ -18,7 +18,7 @@ parameters:
   - name: environment
     displayName: Choose the deployment environment
     type: string
-    default: devlopment
+    default: development
     values:
       - development
       - production
